@@ -1,0 +1,19 @@
+services:
+  amzer:
+    image: ghcr.io/victor-mkw/amzer-interface:latest
+    env_file: .env
+    environment:
+      DASH_DEBUG: "false"
+      BEHIND_PROXY: "true"
+      SESSION_COOKIE_SECURE: "true"
+    ports:
+      # Accessible uniquement par le nginx de la machine.
+      - "127.0.0.1:8050:8050"
+    restart: unless-stopped
+    networks:
+      default:
+      amzer-net:
+
+networks:
+  amzer-net:
+    external: true
